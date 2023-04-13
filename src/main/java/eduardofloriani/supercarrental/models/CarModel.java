@@ -22,31 +22,32 @@ public class CarModel {
     @Column(nullable = false)
     private String model;
     @Column(nullable = false)
-    private String modelYear;
+    private String model_year;
     @Column(nullable = false)
     private String color;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private FuelTypeEnum fuelType;
+    private FuelTypeEnum fuel_type;
     @Column(nullable = false)
-    private int doorsNumber;
+    private int number_of_doors;
     @Column(nullable = false)
-    private int fuelTankCapacity;
+    private int fuel_tank_capacity;
     @Column(nullable = false)
-    private int horsePower;
+    private int horse_power;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TransmissionTypeEnum transmissionType;
+    private TransmissionTypeEnum transmission_type;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TractionEnum traction;
     @Column(nullable = false)
-    private int passengersNumber;
+    private int number_of_passengers;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private BodyTypeEnum bodyType;
+    private BodyTypeEnum body_type;
     @Column(nullable = false, unique = true)
-    private String licensePlate;
+    private String license_plate;
     @Column(nullable = false)
-    private double dailyPrice;
+    private double daily_price;
+
 }
