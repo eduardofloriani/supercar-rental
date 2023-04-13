@@ -16,7 +16,7 @@ public class CarModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private UUID car_id;
     @Column(nullable = false)
     private String brand;
     @Column(nullable = false)
