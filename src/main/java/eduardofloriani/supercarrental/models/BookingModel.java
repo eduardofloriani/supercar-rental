@@ -1,5 +1,6 @@
 package eduardofloriani.supercarrental.models;
 
+import eduardofloriani.supercarrental.enums.BookingStatusEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
@@ -30,5 +31,9 @@ public class BookingModel {
 
     @Column(nullable = false)
     private double price;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BookingStatusEnum status;
 
 }
