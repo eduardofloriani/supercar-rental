@@ -1,19 +1,18 @@
 package eduardofloriani.supercarrental.services;
 
-import eduardofloriani.supercarrental.dtos.CarDto;
 import eduardofloriani.supercarrental.exceptions.CarNotFoundException;
 import eduardofloriani.supercarrental.models.CarModel;
 import eduardofloriani.supercarrental.repositories.CarRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.beans.ConstructorProperties;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class CarService {
 
-    private CarRepository carRepository;
+    private final CarRepository carRepository;
 
     public CarService(CarRepository carRepository) {
         this.carRepository = carRepository;
@@ -28,8 +27,15 @@ public class CarService {
                 .orElseThrow(() -> new CarNotFoundException(id));
     }
 
-    public CarModel saveCar(CarModel carModel) {
+    public CarModel addCar(CarModel carModel) {
         return carRepository.save(carModel);
+    }
+
+    public CarModel updateCar(CarModel carModel) {
+        CarModel car = findCarById(carModel.getCar_id());
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(carModel, car);
+        return carRepository.save(car);
     }
 
     public void deleteCar(UUID id) {
