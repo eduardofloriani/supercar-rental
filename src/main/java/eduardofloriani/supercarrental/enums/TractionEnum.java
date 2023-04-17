@@ -4,6 +4,6 @@ public enum TractionEnum {
 
     FWD,
     RWD,
-    FOUR_WHEEL_DRIVE
+    AWD
 
 }

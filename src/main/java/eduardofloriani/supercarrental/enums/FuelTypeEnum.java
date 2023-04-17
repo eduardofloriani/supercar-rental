@@ -2,14 +2,10 @@ package eduardofloriani.supercarrental.enums;
 
 public enum FuelTypeEnum {
 
-    HIGH_OCTANE,
-    BIOFUEL,
-    RACING,
-    HYBRID,
+    GASOLINA,
+    ETANOL,
     DIESEL,
-    CNG,
-    LPG,
-    HYDROGEN,
-    ELECTRIC
+    HÍBRIDO,
+    ELÉTRICO
 
 }
