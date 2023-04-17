@@ -6,6 +6,7 @@ import eduardofloriani.supercarrental.enums.FuelTypeEnum;
 import eduardofloriani.supercarrental.enums.TractionEnum;
 import eduardofloriani.supercarrental.enums.TransmissionTypeEnum;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.List;
@@ -29,35 +30,35 @@ public class CarDto {
     @NotBlank
     private String color;
 
-    @NotBlank
+    @NotNull
     private FuelTypeEnum fuel_type;
 
-    @NotBlank
+    @NotNull
     private int number_of_doors;
 
-    @NotBlank
+    @NotNull
     private int fuel_tank_capacity;
 
-    @NotBlank
+    @NotNull
     private int horse_power;
 
-    @NotBlank
+    @NotNull
     private TransmissionTypeEnum transmission_type;
 
-    @NotBlank
+    @NotNull
     private TractionEnum traction;
 
-    @NotBlank
+    @NotNull
     private int number_of_passengers;
 
-    @NotBlank
+    @NotNull
     private BodyTypeEnum body_type;
 
     @NotBlank
     private String license_plate;
 
-    @NotBlank
-    private Double daily_price;
+    @NotNull
+    private double daily_price;
 
     private List<BookingDto> bookingDtos;
 
