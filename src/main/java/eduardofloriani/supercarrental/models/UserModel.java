@@ -17,7 +17,7 @@ public class UserModel {
 
     @Id
     @GeneratedValue
-    private UUID user_id;
+    private UUID id;
 
     @Column(nullable = false)
     private String name;
@@ -39,8 +39,5 @@ public class UserModel {
 
     @Column(nullable = false)
     private Date date_of_birth;
-
-    @OneToMany(mappedBy = "userModel")
-    private List<BookingModel> bookingModels;
 
 }

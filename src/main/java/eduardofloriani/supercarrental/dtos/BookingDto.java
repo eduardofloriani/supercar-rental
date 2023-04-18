@@ -1,29 +1,33 @@
 package eduardofloriani.supercarrental.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookingDto {
 
-    private UUID booking_id;
+    private UUID id;
 
     private UUID user_id;
 
+    @NotNull
     private UUID car_id;
 
-    @NotBlank
-    private Date start_date;
+    @NotNull
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    private LocalDateTime start_date;
 
-    @NotBlank
-    private Date end_date;
+    @NotNull
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    private LocalDateTime end_date;
 
-    @NotBlank
+    @NotNull
     private double price;
 
 }

@@ -3,7 +3,8 @@ package eduardofloriani.supercarrental.models;
 import eduardofloriani.supercarrental.enums.BookingStatusEnum;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -13,21 +14,21 @@ public class BookingModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID booking_id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserModel userModel;
+    private UserModel user;
 
     @ManyToOne
     @JoinColumn(name = "car_id")
-    private CarModel carModel;
+    private CarModel car;
 
     @Column(nullable = false)
-    private Date start_date;
+    private LocalDateTime start_date;
 
     @Column(nullable = false)
-    private Date end_date;
+    private LocalDateTime end_date;
 
     @Column(nullable = false)
     private double price;

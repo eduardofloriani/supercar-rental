@@ -1,9 +1,6 @@
 package eduardofloriani.supercarrental.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import eduardofloriani.supercarrental.models.BookingModel;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -18,7 +15,7 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
 
-    private UUID user_id;
+    private UUID id;
 
     @NotBlank
     private String name;

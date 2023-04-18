@@ -16,7 +16,7 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CarDto {
 
-    private UUID car_id;
+    private UUID id;
 
     @NotBlank
     private String brand;

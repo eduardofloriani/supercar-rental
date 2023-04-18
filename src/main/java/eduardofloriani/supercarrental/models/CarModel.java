@@ -17,7 +17,7 @@ public class CarModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID car_id;
+    private UUID id;
 
     @Column(nullable = false)
     private String brand;
@@ -64,8 +64,5 @@ public class CarModel {
 
     @Column(nullable = false)
     private double daily_price;
-
-    @OneToMany(mappedBy = "carModel")
-    private List<BookingModel> bookingModels;
 
 }
