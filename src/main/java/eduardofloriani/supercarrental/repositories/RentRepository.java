@@ -1,11 +1,11 @@
 package eduardofloriani.supercarrental.repositories;
 
-import eduardofloriani.supercarrental.models.BookingModel;
+import eduardofloriani.supercarrental.models.RentModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public interface BookingRepository extends JpaRepository<BookingModel, UUID> {
+public interface RentRepository extends JpaRepository<RentModel, UUID> {
 }

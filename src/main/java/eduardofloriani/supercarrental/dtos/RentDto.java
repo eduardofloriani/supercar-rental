@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BookingDto {
+public class RentDto {
 
     private UUID id;
 

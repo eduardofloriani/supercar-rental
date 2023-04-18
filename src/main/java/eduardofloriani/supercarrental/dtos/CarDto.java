@@ -60,6 +60,6 @@ public class CarDto {
     @NotNull
     private double daily_price;
 
-    private List<BookingDto> bookingDtos;
+    private List<RentDto> rentDtos;
 
 }

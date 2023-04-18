@@ -38,6 +38,6 @@ public class UserDto {
     @NotBlank
     private Date date_of_birth;
 
-    private List<BookingDto> bookingDtos;
+    private List<RentDto> rentDto;
 
 }

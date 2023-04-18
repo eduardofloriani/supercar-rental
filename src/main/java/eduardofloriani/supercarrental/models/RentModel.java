@@ -1,6 +1,6 @@
 package eduardofloriani.supercarrental.models;
 
-import eduardofloriani.supercarrental.enums.BookingStatusEnum;
+import eduardofloriani.supercarrental.enums.RentStatusEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,8 +9,8 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "bookings")
-public class BookingModel {
+@Table(name = "rents")
+public class RentModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +35,6 @@ public class BookingModel {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private BookingStatusEnum status;
+    private RentStatusEnum status;
 
 }

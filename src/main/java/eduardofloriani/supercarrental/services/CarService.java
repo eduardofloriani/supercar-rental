@@ -5,9 +5,7 @@ import eduardofloriani.supercarrental.exceptions.CarNotFoundException;
 import eduardofloriani.supercarrental.models.CarModel;
 import eduardofloriani.supercarrental.repositories.CarRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,7 +36,7 @@ public class CarService {
     }
 
     public CarModel updateCar(CarDto carDto) {
-        CarModel carModel = findCarById(carDto.getCar_id());
+        CarModel carModel = findCarById(carDto.getId());
         modelMapper.map(carDto, carModel);
         return carRepository.save(carModel);
     }

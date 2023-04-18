@@ -1,6 +1,6 @@
 package eduardofloriani.supercarrental.enums;
 
-public enum BookingStatusEnum {
+public enum RentStatusEnum {
 
     ACTIVE,
     FINISHED,
