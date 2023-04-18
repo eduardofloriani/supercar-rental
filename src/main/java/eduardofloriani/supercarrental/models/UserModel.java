@@ -6,8 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -38,6 +37,6 @@ public class UserModel {
     private String phone;
 
     @Column(nullable = false)
-    private Date date_of_birth;
+    private LocalDate date_of_birth;
 
 }

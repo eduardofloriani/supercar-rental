@@ -1,14 +1,15 @@
 package eduardofloriani.supercarrental.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -35,9 +36,8 @@ public class UserDto {
     @NotBlank
     private String phone;
 
-    @NotBlank
-    private Date date_of_birth;
-
-    private List<RentDto> rentDto;
+    @NotNull
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate date_of_birth;
 
 }
