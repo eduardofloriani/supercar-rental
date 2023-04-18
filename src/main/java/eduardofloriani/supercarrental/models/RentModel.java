@@ -4,7 +4,7 @@ import eduardofloriani.supercarrental.enums.RentStatusEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -25,10 +25,10 @@ public class RentModel {
     private CarModel car;
 
     @Column(nullable = false)
-    private LocalDateTime start_date;
+    private LocalDate start_date;
 
     @Column(nullable = false)
-    private LocalDateTime end_date;
+    private LocalDate end_date;
 
     @Column(nullable = false)
     private double price;
