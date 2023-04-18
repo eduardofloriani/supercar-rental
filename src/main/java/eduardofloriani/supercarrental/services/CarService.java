@@ -7,6 +7,7 @@ import eduardofloriani.supercarrental.repositories.CarRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +16,7 @@ import java.util.UUID;
 public class CarService {
 
     private final CarRepository carRepository;
+    private static final ModelMapper modelMapper = new ModelMapper();
 
     public CarService(CarRepository carRepository) {
         this.carRepository = carRepository;
@@ -31,21 +33,19 @@ public class CarService {
 
     public CarModel addCar(CarDto carDto) {
         CarModel carModel = new CarModel();
-        BeanUtils.copyProperties(carDto, carModel);
+        modelMapper.map(carDto, carModel);
         return carRepository.save(carModel);
     }
 
     public CarModel updateCar(CarDto carDto) {
-        CarModel carModel = new CarModel();
-        BeanUtils.copyProperties(carDto, carModel);
-        CarModel car = findCarById(carModel.getCar_id());
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.map(carModel, car);
-        return carRepository.save(car);
+        CarModel carModel = findCarById(carDto.getCar_id());
+        modelMapper.map(carDto, carModel);
+        return carRepository.save(carModel);
     }
 
     public void deleteCar(UUID id) {
         CarModel carModel = findCarById(id);
         carRepository.delete(carModel);
     }
+
 }
