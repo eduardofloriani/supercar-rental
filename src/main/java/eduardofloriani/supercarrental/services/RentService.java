@@ -2,6 +2,7 @@ package eduardofloriani.supercarrental.services;
 
 import eduardofloriani.supercarrental.dtos.RentDto;
 import eduardofloriani.supercarrental.enums.RentStatusEnum;
+import eduardofloriani.supercarrental.exceptions.CarAlreadyAssociatedException;
 import eduardofloriani.supercarrental.exceptions.RentNotFoundException;
 import eduardofloriani.supercarrental.models.RentModel;
 import eduardofloriani.supercarrental.models.CarModel;
@@ -40,11 +41,17 @@ public class RentService {
     }
 
     public RentModel addRent(RentDto rentDto) {
+        UUID carId = rentDto.getCar_id();
+        List<RentModel> rents = rentRepository.findByCarId(carId);
+        if (!rents.isEmpty()) {
+            throw new CarAlreadyAssociatedException(carId);
+        }
+
         RentModel rentModel = new RentModel();
         modelMapper.map(rentDto, rentModel);
 
         int rentalDays = rentUtils.calculateRentalDays(rentDto.getStart_date(), rentDto.getEnd_date());
-        CarModel carModel = carService.findCarById(rentDto.getCar_id());
+        CarModel carModel = carService.findCarById(carId);
         rentModel.setCar(carModel);
         rentModel.setPrice(rentUtils.calculateRentAmount(carModel.getDaily_price(), rentalDays));
         UserModel userModel = userService.findUserById(rentDto.getUser_id());
