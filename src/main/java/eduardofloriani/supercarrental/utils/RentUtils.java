@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 @Component
-public class RentCalculator {
+public class RentUtils {
 
     public int calculateRentalDays(LocalDate startDate, LocalDate endDate) {
         if (startDate == null || endDate == null) {

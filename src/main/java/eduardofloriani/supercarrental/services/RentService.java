@@ -5,8 +5,9 @@ import eduardofloriani.supercarrental.enums.RentStatusEnum;
 import eduardofloriani.supercarrental.exceptions.RentNotFoundException;
 import eduardofloriani.supercarrental.models.RentModel;
 import eduardofloriani.supercarrental.models.CarModel;
+import eduardofloriani.supercarrental.models.UserModel;
 import eduardofloriani.supercarrental.repositories.RentRepository;
-import eduardofloriani.supercarrental.utils.RentCalculator;
+import eduardofloriani.supercarrental.utils.RentUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +19,15 @@ public class RentService {
 
     private final RentRepository rentRepository;
     private final CarService carService;
-
-    private final RentCalculator rentCalculator;
+    private final UserService userService;
+    private final RentUtils rentUtils;
     private static final ModelMapper modelMapper = new ModelMapper();
 
-    public RentService(RentRepository rentRepository, CarService carService, RentCalculator rentCalculator) {
+    public RentService(RentRepository rentRepository, CarService carService, UserService userService, RentUtils rentUtils) {
         this.rentRepository = rentRepository;
         this.carService = carService;
-        this.rentCalculator = rentCalculator;
+        this.userService = userService;
+        this.rentUtils = rentUtils;
     }
 
     public List<RentModel> findAllRents() {
@@ -41,10 +43,12 @@ public class RentService {
         RentModel rentModel = new RentModel();
         modelMapper.map(rentDto, rentModel);
 
-        int rentalDays = rentCalculator.calculateRentalDays(rentDto.getStart_date(), rentDto.getEnd_date());
+        int rentalDays = rentUtils.calculateRentalDays(rentDto.getStart_date(), rentDto.getEnd_date());
         CarModel carModel = carService.findCarById(rentDto.getCar_id());
-        rentModel.setPrice(rentCalculator.calculateRentAmount(carModel.getDaily_price(), rentalDays));
         rentModel.setCar(carModel);
+        rentModel.setPrice(rentUtils.calculateRentAmount(carModel.getDaily_price(), rentalDays));
+        UserModel userModel = userService.findUserById(rentDto.getUser_id());
+        rentModel.setUser(userModel);
         rentModel.setStatus(RentStatusEnum.valueOf("ACTIVE"));
 
         return rentRepository.save(rentModel);

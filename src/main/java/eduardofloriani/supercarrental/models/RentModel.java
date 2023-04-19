@@ -21,7 +21,7 @@ public class RentModel {
     private UserModel user;
 
     @ManyToOne
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "car_id", unique = true)
     private CarModel car;
 
     @Column(nullable = false)

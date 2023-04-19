@@ -14,6 +14,7 @@ public class RentDto {
 
     private UUID id;
 
+    @NotNull
     private UUID user_id;
 
     @NotNull
