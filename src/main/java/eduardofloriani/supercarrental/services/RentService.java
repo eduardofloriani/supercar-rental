@@ -56,7 +56,7 @@ public class RentService {
         rentModel.setPrice(rentUtils.calculateRentAmount(carModel.getDaily_price(), rentalDays));
         UserModel userModel = userService.findUserById(rentDto.getUser_id());
         rentModel.setUser(userModel);
-        rentModel.setStatus(RentStatusEnum.valueOf("ACTIVE"));
+        rentModel.setStatus(RentStatusEnum.ACTIVE);
 
         return rentRepository.save(rentModel);
     }
@@ -66,6 +66,13 @@ public class RentService {
         modelMapper.map(rentDto, rentModel);
 
         return rentRepository.save(rentModel);
+    }
+
+    public void cancelRent(UUID id) {
+        RentModel rentModel = findRentById(id);
+        rentModel.setStatus(RentStatusEnum.CANCELED);
+
+        rentRepository.save(rentModel);
     }
 
     public void deleteRent(UUID id) {

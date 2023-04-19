@@ -45,6 +45,12 @@ public class RentController {
         return ResponseEntity.ok(rentModel);
     }
 
+    @PutMapping("/cancel/{id}")
+    public ResponseEntity<Void> cancel(@PathVariable UUID id) {
+        rentService.cancelRent(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         rentService.deleteRent(id);
