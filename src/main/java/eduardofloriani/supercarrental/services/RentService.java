@@ -75,6 +75,13 @@ public class RentService {
         rentRepository.save(rentModel);
     }
 
+    public void finishRent(UUID id) {
+        RentModel rentModel = findRentById(id);
+        rentModel.setStatus(RentStatusEnum.FINISHED);
+
+        rentRepository.save(rentModel);
+    }
+
     public void deleteRent(UUID id) {
         RentModel rentModel = findRentById(id);
         rentRepository.delete(rentModel);

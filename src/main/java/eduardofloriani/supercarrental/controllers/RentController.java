@@ -51,6 +51,12 @@ public class RentController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/finish/{id}")
+    public ResponseEntity<Void> finish(@PathVariable UUID id) {
+        rentService.finishRent(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         rentService.deleteRent(id);
