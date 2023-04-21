@@ -1,6 +1,7 @@
 package eduardofloriani.supercarrental.controllers;
 
 import eduardofloriani.supercarrental.dtos.CarDto;
+import eduardofloriani.supercarrental.dtos.CarFilterDto;
 import eduardofloriani.supercarrental.models.CarModel;
 import eduardofloriani.supercarrental.services.CarService;
 import jakarta.validation.Valid;
@@ -30,6 +31,12 @@ public class CarController {
     public ResponseEntity<CarModel> findById(@PathVariable UUID id) {
         CarModel car = carService.findCarById(id);
         return ResponseEntity.ok(car);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<CarModel>> findByFilters(@RequestBody CarFilterDto filters) {
+        List<CarModel> cars = carService.findCarsByFilters(filters);
+        return ResponseEntity.ok(cars);
     }
 
     @PostMapping("/add")
