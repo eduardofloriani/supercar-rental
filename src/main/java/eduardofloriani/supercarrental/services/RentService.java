@@ -44,7 +44,12 @@ public class RentService {
         UUID carId = rentDto.getCar_id();
         List<RentModel> rents = rentRepository.findByCarId(carId);
         if (!rents.isEmpty()) {
-            throw new CarAlreadyAssociatedException(carId);
+            for (RentModel rent : rents) {
+                if (rentUtils.isOverLapping(rent.getStart_date(), rent.getEnd_date(),
+                        rentDto.getStart_date(), rentDto.getEnd_date()) && rent.getStatus() == RentStatusEnum.ACTIVE) {
+                    throw new CarAlreadyAssociatedException(carId);
+                }
+            }
         }
 
         RentModel rentModel = new RentModel();
