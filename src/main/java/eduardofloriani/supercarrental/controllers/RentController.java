@@ -46,6 +46,18 @@ public class RentController {
         return ResponseEntity.ok(rents);
     }
 
+    @GetMapping("car/{id}/active")
+    public ResponseEntity<List<RentModel>> findActiveRentsByCarId(@PathVariable UUID id) {
+        List<RentModel> rents = rentService.findActiveRentsByRentType(id, RentTypeEnum.CAR);
+        return ResponseEntity.ok(rents);
+    }
+
+    @GetMapping("user/{id}/active")
+    public ResponseEntity<List<RentModel>> findActiveRentsByUserId(@PathVariable UUID id) {
+        List<RentModel> rents = rentService.findActiveRentsByRentType(id, RentTypeEnum.USER);
+        return ResponseEntity.ok(rents);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<RentModel> add(@RequestBody @Valid RentDto rentDto) {
         RentModel rentModel = rentService.addRent(rentDto);

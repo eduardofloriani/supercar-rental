@@ -14,4 +14,7 @@ public interface RentRepository extends JpaRepository<RentModel, UUID> {
     List<RentModel> findByCarId(UUID id);
     List<RentModel> findByUserId(UUID id);
 
+    List<RentModel> findByCarIdAndStatus(UUID id, RentStatusEnum status);
+    List<RentModel> findByUserIdAndStatus(UUID id, RentStatusEnum status);
+
 }

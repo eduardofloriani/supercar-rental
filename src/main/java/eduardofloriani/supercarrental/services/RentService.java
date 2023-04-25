@@ -54,6 +54,18 @@ public class RentService {
         return rents;
     }
 
+    public List<RentModel> findActiveRentsByRentType(UUID id, RentTypeEnum type) {
+        List<RentModel> rents = new ArrayList<>();
+
+        if (type == RentTypeEnum.CAR) {
+            rents = rentRepository.findByCarIdAndStatus(id, RentStatusEnum.ACTIVE);
+        } else if (type == RentTypeEnum.USER) {
+            rents = rentRepository.findByUserIdAndStatus(id, RentStatusEnum.ACTIVE);
+        }
+
+        return rents;
+    }
+
     public RentModel addRent(RentDto rentDto) {
         UUID carId = rentDto.getCar_id();
         List<RentModel> rents = rentRepository.findByCarId(carId);
