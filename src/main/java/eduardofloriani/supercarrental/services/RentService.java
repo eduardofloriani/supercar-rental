@@ -42,28 +42,24 @@ public class RentService {
                 .orElseThrow(() -> new RentNotFoundException(id));
     }
 
-    public List<RentModel> findAllRentsByRentType(UUID id, RentTypeEnum type) {
+    public List<RentModel> findByRentTypeAndStatus(UUID id, RentTypeEnum type, RentStatusEnum status) {
         List<RentModel> rents = new ArrayList<>();
-
-        if (type == RentTypeEnum.CAR) {
-            rents = rentRepository.findByCarId(id);
-        } else if (type == RentTypeEnum.USER) {
-            rents = rentRepository.findByUserId(id);
+        switch (type) {
+            case CAR -> rents = status != null ? rentRepository.findByCarIdAndStatus(id, status) :
+                    rentRepository.findByCarId(id);
+            case USER -> rents = status != null ? rentRepository.findByUserIdAndStatus(id, status) :
+                    rentRepository.findByUserId(id);
         }
 
         return rents;
     }
 
+    public List<RentModel> findAllRentsByRentType(UUID id, RentTypeEnum type) {
+        return findByRentTypeAndStatus(id, type, null);
+    }
+
     public List<RentModel> findActiveRentsByRentType(UUID id, RentTypeEnum type) {
-        List<RentModel> rents = new ArrayList<>();
-
-        if (type == RentTypeEnum.CAR) {
-            rents = rentRepository.findByCarIdAndStatus(id, RentStatusEnum.ACTIVE);
-        } else if (type == RentTypeEnum.USER) {
-            rents = rentRepository.findByUserIdAndStatus(id, RentStatusEnum.ACTIVE);
-        }
-
-        return rents;
+        return findByRentTypeAndStatus(id, type, RentStatusEnum.ACTIVE);
     }
 
     public RentModel addRent(RentDto rentDto) {
