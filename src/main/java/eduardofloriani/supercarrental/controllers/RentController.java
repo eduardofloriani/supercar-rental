@@ -1,6 +1,7 @@
 package eduardofloriani.supercarrental.controllers;
 
 import eduardofloriani.supercarrental.dtos.RentDto;
+import eduardofloriani.supercarrental.enums.RentTypeEnum;
 import eduardofloriani.supercarrental.models.RentModel;
 import eduardofloriani.supercarrental.services.RentService;
 import jakarta.validation.Valid;
@@ -31,6 +32,18 @@ public class RentController {
     public ResponseEntity<RentModel> findById(@PathVariable UUID id) {
         RentModel rentModel = rentService.findRentById(id);
         return ResponseEntity.ok(rentModel);
+    }
+
+    @GetMapping("/car/{id}")
+    public ResponseEntity<List<RentModel>> findAllByCarId(@PathVariable UUID id) {
+        List<RentModel> rents = rentService.findAllRentsByRentType(id, RentTypeEnum.CAR);
+        return ResponseEntity.ok(rents);
+    }
+
+    @GetMapping("user/{id}")
+    public ResponseEntity<List<RentModel>> findAllByUserId(@PathVariable UUID id) {
+        List<RentModel> rents = rentService.findAllRentsByRentType(id, RentTypeEnum.USER);
+        return ResponseEntity.ok(rents);
     }
 
     @PostMapping("/add")

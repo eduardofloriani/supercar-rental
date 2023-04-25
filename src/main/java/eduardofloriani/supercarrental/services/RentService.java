@@ -2,6 +2,7 @@ package eduardofloriani.supercarrental.services;
 
 import eduardofloriani.supercarrental.dtos.RentDto;
 import eduardofloriani.supercarrental.enums.RentStatusEnum;
+import eduardofloriani.supercarrental.enums.RentTypeEnum;
 import eduardofloriani.supercarrental.exceptions.CarAlreadyAssociatedException;
 import eduardofloriani.supercarrental.exceptions.RentNotFoundException;
 import eduardofloriani.supercarrental.models.RentModel;
@@ -12,6 +13,7 @@ import eduardofloriani.supercarrental.utils.RentUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,6 +40,18 @@ public class RentService {
     public RentModel findRentById(UUID id) {
         return rentRepository.findById(id)
                 .orElseThrow(() -> new RentNotFoundException(id));
+    }
+
+    public List<RentModel> findAllRentsByRentType(UUID id, RentTypeEnum type) {
+        List<RentModel> rents = new ArrayList<>();
+
+        if (type == RentTypeEnum.CAR) {
+            rents = rentRepository.findByCarId(id);
+        } else if (type == RentTypeEnum.USER) {
+            rents = rentRepository.findByUserId(id);
+        }
+
+        return rents;
     }
 
     public RentModel addRent(RentDto rentDto) {
